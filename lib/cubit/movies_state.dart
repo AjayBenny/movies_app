@@ -10,15 +10,12 @@ final class MoviesLoading extends MoviesState {}
 final class MoviesLoaded extends MoviesState {
   final List<dynamic> movies;
   final List<dynamic> filteredMovies;
+  final bool hasMore;
   MoviesLoaded({
     required this.movies,
     required this.filteredMovies,
+    required this.hasMore,
   });
 }
 
-final class MoviesFailed extends MoviesState {
-  final bool hasNetworkError;
-  final List<dynamic> offlineFavourites;
-  MoviesFailed(
-      {this.hasNetworkError = false, this.offlineFavourites = const []});
-}
+final class MoviesFailed extends MoviesState {}

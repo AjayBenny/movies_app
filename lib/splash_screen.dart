@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'list_screen.dart';
-import 'movies_cubit.dart';
+import 'cubit/movies_cubit.dart';
+import 'view/list_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
