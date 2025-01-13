@@ -2,18 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'cubit/movies_cubit.dart';
-import 'view/list_screen.dart';
+import 'package:movies_app/cubit/movies_cubit.dart';
+import 'package:movies_app/view/list_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -24,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2), // Animation duration
+      duration: const Duration(seconds: 2),
     );
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
@@ -67,7 +66,6 @@ class _SplashScreenState extends State<SplashScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Logo Image
                   Image.asset(
                     'assets/logo.png',
                     width: 120,
