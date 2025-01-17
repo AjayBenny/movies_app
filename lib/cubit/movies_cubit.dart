@@ -78,4 +78,6 @@ class MoviesCubit extends Cubit<MoviesState> {
       }
     }
   }
+
+  void saveFavourites() {}
 }

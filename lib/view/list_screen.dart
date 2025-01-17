@@ -12,6 +12,7 @@ class MoviesListScreen extends StatefulWidget {
 
 class _MoviesListScreenState extends State<MoviesListScreen> {
   final ScrollController _scrollController = ScrollController();
+  final Set<int> _favoriteMovies = {};
 
   @override
   void initState() {
@@ -28,6 +29,16 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
     }
   }
 
+  void _toggleFavorite(int movieId) {
+    setState(() {
+      if (_favoriteMovies.contains(movieId)) {
+        _favoriteMovies.remove(movieId);
+      } else {
+        _favoriteMovies.add(movieId);
+      }
+    });
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -38,7 +49,13 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movies'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('Movies'),
+            Text(_favoriteMovies.length.toString()),
+          ],
+        ),
         centerTitle: false,
       ),
       body: Column(
@@ -82,6 +99,8 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                             : const SizedBox.shrink();
                       }
                       final movie = state.filteredMovies[index];
+                      final movieId = movie['id'];
+                      final isFavorite = _favoriteMovies.contains(movieId);
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -110,6 +129,12 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                             subtitle: Text(
                               movie['releaseDate'] ?? 'No Release Date',
                               style: const TextStyle(color: Colors.grey),
+                            ),
+                            trailing: IconButton(
+                              onPressed: () => _toggleFavorite(movieId),
+                              icon: Icon(isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border),
                             ),
                           ),
                         ),
